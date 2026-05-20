@@ -12,5 +12,6 @@
     },
     "moduleResolution": "node",
     "importHelpers": true,
+    "ignoreDeprecations": "6.0"
   }
 }

@@ -1,11 +1,12 @@
-import { Button } from "./components/ui/button";
+import { RouterProvider } from "react-router";
+import { TooltipProvider } from "./components/ui/tooltip";
+import router from "./router";
 
 function App() {
   return (
-    <div>
-      <p className="text-blue-500">hello world</p>
-      <Button>Click me!</Button>
-    </div>
+    <TooltipProvider>
+      <RouterProvider router={router} />
+    </TooltipProvider>
   );
 }
 
