@@ -1,9 +1,21 @@
-import type { NavItem } from "@/types";
+import type { NavItem, NavItemChild } from "@/types";
 import { create } from "zustand";
 
 interface AppState {
-  activeNav: NavItem | undefined;
-  setActiveNav: (navItem: NavItem | undefined) => void;
+  activeNav:
+    | {
+        parent: NavItem | undefined;
+        children: NavItemChild | undefined;
+      }
+    | undefined;
+  setActiveNav: (
+    navItem:
+      | {
+          parent: NavItem | undefined;
+          children: NavItemChild | undefined;
+        }
+      | undefined,
+  ) => void;
 }
 
 export const useAppStore = create<AppState>()((set) => ({

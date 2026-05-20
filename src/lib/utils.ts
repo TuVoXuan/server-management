@@ -7,8 +7,25 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getActiveNav(pathname: string) {
-  const activeNavItem = NavMainItems.find((item) =>
-    pathname.startsWith(item.url),
-  );
-  return activeNavItem;
+  for (const item of NavMainItems) {
+    // check parent
+    const isParentActive = item.url !== "/" && pathname.startsWith(item.url);
+
+    // check child
+    const activeChild = item.items?.find((subItem) =>
+      pathname.startsWith(subItem.url),
+    );
+
+    if (isParentActive || activeChild) {
+      return {
+        activeParent: item,
+        activeChild,
+      };
+    }
+  }
+
+  return {
+    activeParent: undefined,
+    activeChild: undefined,
+  };
 }

@@ -3,7 +3,12 @@ import { AppSidebar } from "../app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar";
 import { useAppStore } from "@/store/useApp";
 import { Separator } from "../ui/separator";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbList } from "../ui/breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "../ui/breadcrumb";
 
 export default function MainLayout() {
   const { activeNav } = useAppStore();
@@ -18,7 +23,15 @@ export default function MainLayout() {
             <Separator orientation="vertical" />
             <Breadcrumb>
               <BreadcrumbList>
-                <BreadcrumbItem>{activeNav?.title}</BreadcrumbItem>
+                {activeNav?.parent && (
+                  <BreadcrumbItem>{activeNav.parent.title}</BreadcrumbItem>
+                )}
+                {activeNav?.children && (
+                  <>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>{activeNav.children.title}</BreadcrumbItem>
+                  </>
+                )}
               </BreadcrumbList>
             </Breadcrumb>
           </div>

@@ -1,9 +1,10 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import MainLayout from "./components/layouts/main-layout";
 import DashboardPage from "./pages/dashboard";
-import ServerPage from "./pages/server";
+import InfrastructureServerPage from "./pages/infracstructure/servers";
 import SettingPage from "./pages/setting";
 import AppPath from "./constants/app-path";
+import InfrastructureLocationPage from "./pages/infracstructure/locations";
 
 const router = createBrowserRouter([
   {
@@ -19,8 +20,21 @@ const router = createBrowserRouter([
         element: <DashboardPage />,
       },
       {
-        path: AppPath.SERVER,
-        element: <ServerPage />,
+        path: AppPath.INFRASTRUCTURE,
+        children: [
+          {
+            index: true,
+            element: <Navigate to={AppPath.INFRASTRUCTURE_SERVERS} />,
+          },
+          {
+            path: AppPath.INFRASTRUCTURE_SERVERS,
+            element: <InfrastructureServerPage />,
+          },
+          {
+            path: AppPath.INFRASTRUCTURE_LOCATIONS,
+            element: <InfrastructureLocationPage />,
+          },
+        ],
       },
       {
         path: AppPath.SETTING,

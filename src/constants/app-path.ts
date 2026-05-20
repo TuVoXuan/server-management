@@ -1,7 +1,11 @@
 const AppPath = {
   INDEX: "/",
   DASHBOARD: "/dashboard",
-  SERVER: "/server",
+
+  INFRASTRUCTURE: "/infrastructure",
+  INFRASTRUCTURE_SERVERS: "/infrastructure/servers",
+  INFRASTRUCTURE_LOCATIONS: "/infrastructure/locations",
+
   SETTING: "/setting",
 };
 

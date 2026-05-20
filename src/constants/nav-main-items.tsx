@@ -9,9 +9,13 @@ const NavMainItems: NavItem[] = [
     icon: <LayoutDashboard />,
   },
   {
-    title: "Server",
-    url: AppPath.SERVER,
+    title: "Infrastructure",
+    url: AppPath.INFRASTRUCTURE,
     icon: <Server />,
+    items: [
+      { title: "Servers", url: AppPath.INFRASTRUCTURE_SERVERS },
+      { title: "Locations", url: AppPath.INFRASTRUCTURE_LOCATIONS },
+    ],
   },
   {
     title: "Setting",

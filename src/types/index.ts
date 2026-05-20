@@ -3,8 +3,10 @@ export interface NavItem {
   url: string;
   icon: React.ReactNode;
   isActive?: boolean;
-  items?: {
-    title: string;
-    url: string;
-  }[];
+  items?: NavItemChild[];
+}
+
+export interface NavItemChild {
+  title: string;
+  url: string;
 }

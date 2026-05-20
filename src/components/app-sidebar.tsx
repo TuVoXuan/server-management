@@ -49,7 +49,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const curPathname = location.pathname;
 
   useEffect(() => {
-    setActiveNav(getActiveNav(curPathname));
+    const { activeChild, activeParent } = getActiveNav(curPathname);
+    setActiveNav({ parent: activeParent, children: activeChild });
   }, [curPathname]);
 
   return (

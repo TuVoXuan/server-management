@@ -16,6 +16,7 @@ import { useAppStore } from "@/store/useApp";
 import type { NavItem } from "@/types";
 import { ChevronRightIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router";
+import { Fragment } from "react/jsx-runtime";
 
 export function NavMain({ items }: { items: NavItem[] }) {
   const { activeNav } = useAppStore();
@@ -25,17 +26,19 @@ export function NavMain({ items }: { items: NavItem[] }) {
     <SidebarGroup>
       <SidebarMenu>
         {items.map((item) => (
-          <>
+          <Fragment key={item.title}>
             {item.items ? (
               <Collapsible
-                key={item.title}
                 asChild
-                defaultOpen={item.isActive}
+                defaultOpen={activeNav?.parent?.url == item.url}
                 className="group/collapsible"
               >
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
-                    <SidebarMenuButton tooltip={item.title}>
+                    <SidebarMenuButton
+                      tooltip={item.title}
+                      isActive={activeNav?.parent?.url == item.url}
+                    >
                       {item.icon}
                       <span>{item.title}</span>
                       <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -45,7 +48,11 @@ export function NavMain({ items }: { items: NavItem[] }) {
                     <SidebarMenuSub>
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild>
+                          <SidebarMenuSubButton
+                            asChild
+                            isActive={activeNav?.children?.url == subItem.url}
+                            onClick={() => navigate(item.url)}
+                          >
                             <Link to={subItem.url}>
                               <span>{subItem.title}</span>
                             </Link>
@@ -59,14 +66,14 @@ export function NavMain({ items }: { items: NavItem[] }) {
             ) : (
               <SidebarMenuButton
                 tooltip={item.title}
-                isActive={activeNav?.url == item.url}
+                isActive={activeNav?.parent?.url == item.url}
                 onClick={() => navigate(item.url)}
               >
                 {item.icon}
                 <span>{item.title}</span>
               </SidebarMenuButton>
             )}
-          </>
+          </Fragment>
         ))}
       </SidebarMenu>
     </SidebarGroup>
