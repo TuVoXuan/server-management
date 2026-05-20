@@ -1,0 +1,16 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "tslib": ["./node_modules/tslib/tslib.d.ts"]
+    },
+    "moduleResolution": "node",
+    "importHelpers": true,
+  }
+}
