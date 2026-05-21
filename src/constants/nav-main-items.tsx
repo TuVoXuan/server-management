@@ -6,12 +6,12 @@ const NavMainItems: NavItem[] = [
   {
     title: "Dashboard",
     url: AppPath.DASHBOARD,
-    icon: <LayoutDashboard />,
+    icon: <LayoutDashboard className="size-5" />,
   },
   {
     title: "Infrastructure",
     url: AppPath.INFRASTRUCTURE,
-    icon: <Server />,
+    icon: <Server className="size-5" />,
     items: [
       { title: "Servers", url: AppPath.INFRASTRUCTURE_SERVERS },
       { title: "Locations", url: AppPath.INFRASTRUCTURE_LOCATIONS },
@@ -20,7 +20,7 @@ const NavMainItems: NavItem[] = [
   {
     title: "Setting",
     url: AppPath.SETTING,
-    icon: <Settings />,
+    icon: <Settings className="size-5" />,
   },
 ];
 

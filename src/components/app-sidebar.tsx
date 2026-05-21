@@ -11,11 +11,11 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import NavMainItems from "@/constants/nav-main-items";
-import { FrameIcon, MapIcon, PieChartIcon, Server } from "lucide-react";
+import { getActiveNav } from "@/lib/utils";
 import { useAppStore } from "@/store/useApp";
+import { Server } from "lucide-react";
 import { useEffect } from "react";
 import { useLocation } from "react-router";
-import { getActiveNav } from "@/lib/utils";
 
 // This is sample data.
 const data = {
@@ -24,23 +24,6 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: <FrameIcon />,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: <PieChartIcon />,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: <MapIcon />,
-    },
-  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

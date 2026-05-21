@@ -38,6 +38,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
                     <SidebarMenuButton
                       tooltip={item.title}
                       isActive={activeNav?.parent?.url == item.url}
+                      className="hover:bg-sky-600/10 hover:text-sky-600 active:bg-sky-600/10 active:text-sky-600 data-open:hover:bg-sky-600/10 data-open:hover:text-sky-600 data-active:bg-sky-600/10 data-active:text-sky-600"
                     >
                       {item.icon}
                       <span>{item.title}</span>
@@ -52,6 +53,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
                             asChild
                             isActive={activeNav?.children?.url == subItem.url}
                             onClick={() => navigate(item.url)}
+                            className="hover:bg-sky-600/10 hover:text-sky-600 active:bg-sky-600/10 active:text-sky-600 data-open:hover:bg-sky-600/10 data-open:hover:text-sky-600 data-active:bg-sky-600/10 data-active:text-sky-600"
                           >
                             <Link to={subItem.url}>
                               <span>{subItem.title}</span>
@@ -68,6 +70,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
                 tooltip={item.title}
                 isActive={activeNav?.parent?.url == item.url}
                 onClick={() => navigate(item.url)}
+                className="hover:bg-sky-600/10 hover:text-sky-600 active:bg-sky-600/10 active:text-sky-600 data-open:hover:bg-sky-600/10 data-open:hover:text-sky-600 data-active:bg-sky-600/10 data-active:text-sky-600"
               >
                 {item.icon}
                 <span>{item.title}</span>

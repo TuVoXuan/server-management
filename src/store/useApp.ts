@@ -16,9 +16,17 @@ interface AppState {
         }
       | undefined,
   ) => void;
+
+  //theme
+  isDarkMode: boolean;
+  setIsDarkMode: (isDarkMode: boolean) => void;
 }
 
 export const useAppStore = create<AppState>()((set) => ({
   activeNav: undefined,
   setActiveNav: (navItem) => set(() => ({ activeNav: navItem })),
+
+  //theme
+  isDarkMode: false,
+  setIsDarkMode: (isDarkMode) => set(() => ({ isDarkMode })),
 }));
