@@ -1,10 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { compareAsc } from "date-fns";
-import {
-  ActivityTypes,
-  OperationSystem,
-  Platform,
-  ServerStatus,
-} from "./constants/server";
+import { ActivityTypes, OperationSystem, Platform } from "./constants/server";
 
 export const locations = [
   {
@@ -69,38 +65,89 @@ export const locations = [
   },
 ];
 
-const osList = Object.values(OperationSystem);
-const platformList = Object.values(Platform);
-const statusList = Object.values(ServerStatus);
-
 export const servers = [
   ...Array.from({ length: 40 }, (_, i) => {
     const id = i + 1;
 
     const now = Date.now();
 
-    // random time within last 30 days
+    // random created_at within last 30 days
     const createdAt = new Date(
       now - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000),
     );
 
-    // updated_at must >= created_at and <= now
+    // updated_at >= created_at && <= now
     const updatedAt = new Date(
       createdAt.getTime() +
         Math.floor(Math.random() * (now - createdAt.getTime())),
     );
 
+    // weighted random helper
+    const randomItem = (items: any) =>
+      items[Math.floor(Math.random() * items.length)];
+
+    // intentionally duplicated values to make chart data uneven
+    const randomOS = randomItem([
+      "Ubuntu",
+      "Ubuntu",
+      "Ubuntu",
+      "Debian",
+      "Debian",
+      "CentOS",
+      "Windows Server",
+    ]);
+
+    const randomPlatform = randomItem([
+      "Nginx",
+      "Nginx",
+      "Nginx",
+      "Apache",
+      "Apache",
+      "Docker",
+      "NodeJS",
+    ]);
+
+    const randomLocationId = randomItem([
+      1, 1, 1, 2, 2, 3, 4, 4, 5, 6, 7, 8, 9, 10,
+    ]);
+
+    const randomStatus = randomItem([
+      "Online",
+      "Online",
+      "Online",
+      "Maintenance",
+      "Offline",
+    ]);
+
+    const randomVersionMap = {
+      Ubuntu: randomItem(["20.04", "22.04", "24.04"]),
+      Debian: randomItem(["11", "12"]),
+      CentOS: randomItem(["7", "8", "9"]),
+      "Windows Server": randomItem(["2019", "2022"]),
+    } as any;
+
     return {
       id,
-      IP_address: `10.0.${Math.floor(id / 10)}.${id}`,
-      location_id: ((id - 1) % 10) + 1,
+      IP_address: `10.${Math.floor(Math.random() * 255)}.${Math.floor(
+        Math.random() * 255,
+      )}.${Math.floor(Math.random() * 255)}`,
+
+      location_id: randomLocationId,
+
       name: `server-${id.toString().padStart(2, "0")}`,
-      operation_system: osList[id % osList.length],
-      version: ["20.04", "22.04", "11", "2022"][id % 4],
-      platform: platformList[id % platformList.length],
-      sys_architecture: id % 2 === 0 ? "x64" : "x86",
-      status: statusList[Math.floor(Math.random() * statusList.length)],
+
+      operation_system: randomOS,
+
+      version: randomVersionMap[randomOS],
+
+      platform: randomPlatform,
+
+      sys_architecture: Math.random() > 0.2 ? "x64" : "x86",
+
+      status: randomStatus,
+
       created_at: createdAt.toISOString(),
+
       updated_at: updatedAt.toISOString(),
     };
   }),
@@ -159,5 +206,29 @@ export function groupServerByLocation() {
       .filter((server) => server.location_id == location.id)
       .map((server) => ({ ...server, location: { ...location } }));
     return { ...location, servers: [...serverList] };
+  });
+}
+
+export function getStatisticalOS() {
+  return Object.entries(OperationSystem).map((os) => {
+    const countOS = servers.filter(
+      (server) => server.operation_system == os[1],
+    ).length;
+    return {
+      key: os[0],
+      count: countOS,
+    };
+  });
+}
+
+export function getStatisticalPlatform() {
+  return Object.entries(Platform).map((platform) => {
+    const countPlatform = servers.filter(
+      (server) => server.platform == platform[1],
+    ).length;
+    return {
+      key: platform[0],
+      count: countPlatform,
+    };
   });
 }

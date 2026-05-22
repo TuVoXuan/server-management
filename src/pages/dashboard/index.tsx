@@ -1,10 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { ServerStatus } from "@/constants/server";
 import {
   filterTotalServerAndNewServer,
   getTotalServerByStatus,
-  groupServerByLocation,
   servers,
 } from "@/mock-data";
 import { format, sub } from "date-fns";
@@ -20,11 +24,8 @@ import CustomRangePicker from "./components/custom-range-picker";
 import { GlobeMap } from "./components/globe-map";
 import ServerInfoCard from "./components/server-info-card";
 import TimeRange from "./components/time-range";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { TopOSChart } from "./components/top-os-chart";
+import { TopPlartformChart } from "./components/top-platform-chart";
 
 type ActionType =
   | "UPDATE_TIME_RANGE"
@@ -252,6 +253,11 @@ export default function DashboardPage() {
         </CardHeader>
         <GlobeMap />
       </Card>
+
+      <div className="grid gap-3 xl:grid-cols-3">
+        <TopOSChart />
+        <TopPlartformChart />
+      </div>
     </div>
   );
 }
