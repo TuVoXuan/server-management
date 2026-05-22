@@ -19,7 +19,7 @@ export default function ServerInfoCard({
   rightIcon,
 }: Props) {
   return (
-    <Card size="sm" className="mx-auto w-full max-w-sm">
+    <Card size="sm" className="mx-auto w-full">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardAction>{rightIcon}</CardAction>

@@ -21,17 +21,15 @@ interface Props {
 }
 
 export function DatePicker({ value, onValueChange, label, helperText }: Props) {
+  const [open, setOpen] = React.useState<boolean>(false);
+
   return (
     <Field className="mx-auto w-44">
-      {label && <FieldLabel htmlFor="date-picker-simple">{label}</FieldLabel>}
+      {label && <FieldLabel>{label}</FieldLabel>}
 
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            id="date-picker-simple"
-            className="justify-start font-normal"
-          >
+          <Button variant="outline" className="justify-start font-normal">
             <CalendarIcon />
             {value ? format(value, "PPP") : <span>Pick a date</span>}
           </Button>
@@ -40,7 +38,10 @@ export function DatePicker({ value, onValueChange, label, helperText }: Props) {
           <Calendar
             mode="single"
             selected={value}
-            onSelect={onValueChange}
+            onSelect={(value) => {
+              onValueChange(value);
+              setOpen(false);
+            }}
             defaultMonth={value}
             captionLayout="dropdown"
           />
