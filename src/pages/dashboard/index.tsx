@@ -4,6 +4,7 @@ import { ServerStatus } from "@/constants/server";
 import {
   filterTotalServerAndNewServer,
   getTotalServerByStatus,
+  groupServerByLocation,
   servers,
 } from "@/mock-data";
 import { format, sub } from "date-fns";
@@ -171,7 +172,7 @@ export default function DashboardPage() {
               }
             >
               <PopoverTrigger asChild>
-                <Button variant={"secondary"}>
+                <Button variant={"outline"}>
                   <CalendarIcon />
                   Custom range picker
                 </Button>

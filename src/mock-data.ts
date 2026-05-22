@@ -74,9 +74,21 @@ const platformList = Object.values(Platform);
 const statusList = Object.values(ServerStatus);
 
 export const servers = [
-  // 1 - 40
   ...Array.from({ length: 40 }, (_, i) => {
     const id = i + 1;
+
+    const now = Date.now();
+
+    // random time within last 30 days
+    const createdAt = new Date(
+      now - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000),
+    );
+
+    // updated_at must >= created_at and <= now
+    const updatedAt = new Date(
+      createdAt.getTime() +
+        Math.floor(Math.random() * (now - createdAt.getTime())),
+    );
 
     return {
       id,
@@ -87,9 +99,9 @@ export const servers = [
       version: ["20.04", "22.04", "11", "2022"][id % 4],
       platform: platformList[id % platformList.length],
       sys_architecture: id % 2 === 0 ? "x64" : "x86",
-      status: statusList[Math.floor(Math.random() * 2)],
-      created_at: `2026-05-${String((id % 28) + 1).padStart(2, "0")}T08:00:00Z`,
-      updated_at: `2026-05-${String((id % 28) + 1).padStart(2, "0")}T12:00:00Z`,
+      status: statusList[Math.floor(Math.random() * statusList.length)],
+      created_at: createdAt.toISOString(),
+      updated_at: updatedAt.toISOString(),
     };
   }),
 ];
@@ -97,16 +109,28 @@ export const servers = [
 const activityTypes = Object.values(ActivityTypes);
 
 export const serverActivities = [
-  // 1 - 50
   ...Array.from({ length: 50 }, (_, i) => {
     const id = i + 1;
+
+    const now = Date.now();
+
+    // random time within last 30 days
+    const createdAt = new Date(
+      now - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000),
+    );
+
+    // updated_at must >= created_at and <= now
+    const updatedAt = new Date(
+      createdAt.getTime() +
+        Math.floor(Math.random() * (now - createdAt.getTime())),
+    );
 
     return {
       id,
       server_id: ((id - 1) % 40) + 1,
       activity_type: activityTypes[id % activityTypes.length],
-      created_at: `2026-05-${String((id % 28) + 1).padStart(2, "0")}T10:00:00Z`,
-      updated_at: `2026-05-${String((id % 28) + 1).padStart(2, "0")}T10:30:00Z`,
+      created_at: createdAt.toISOString(),
+      updated_at: updatedAt.toISOString(),
     };
   }),
 ];
@@ -127,4 +151,13 @@ export function filterTotalServerAndNewServer(from: Date, to: Date) {
   ).length;
 
   return { totalServer, totalNewServer };
+}
+
+export function groupServerByLocation() {
+  return locations.map((location) => {
+    const serverList = servers
+      .filter((server) => server.location_id == location.id)
+      .map((server) => ({ ...server, location: { ...location } }));
+    return { ...location, servers: [...serverList] };
+  });
 }

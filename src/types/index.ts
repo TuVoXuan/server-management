@@ -10,3 +10,25 @@ export interface NavItemChild {
   title: string;
   url: string;
 }
+
+export interface ILocation {
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+
+export interface IServer {
+  id: number;
+  IP_address: string;
+  location_id: number;
+  location?: ILocation;
+  name: string;
+  operation_system: string;
+  version: string;
+  platform: string;
+  sys_architecture: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
