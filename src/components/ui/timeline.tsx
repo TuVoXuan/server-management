@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 interface TimelineItemProps {
   title: string;
   description?: string;
@@ -10,10 +12,10 @@ export function TimelineItem({
   dotColor,
 }: TimelineItemProps) {
   return (
-    <div className="group relative pl-5 min-h-10 pb-4 last:pb-0">
-      <p className="font-semibold">{title}</p>
+    <div className="group relative pl-5 min-h-10 pb-4 last:pb-0 w-fit">
+      <p className="font-semibold w-fit">{title}</p>
       {description && (
-        <p className="text-xs text-muted-foreground">{description}</p>
+        <p className="text-xs text-muted-foreground w-fit">{description}</p>
       )}
       <div
         style={{ backgroundColor: dotColor }}
@@ -22,8 +24,4 @@ export function TimelineItem({
       <div className="absolute z-1 left-1.5 group-first:top-2 top-0 -translate-x-1/2 w-0.5 bg-muted-foreground h-full"></div>
     </div>
   );
-}
-
-export function Timeline({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
 }
