@@ -26,6 +26,8 @@ import ServerInfoCard from "./components/server-info-card";
 import TimeRange from "./components/time-range";
 import { TopOSChart } from "./components/top-os-chart";
 import { TopPlartformChart } from "./components/top-platform-chart";
+import TopArchChart from "./components/top-arch-chart";
+import RecentActivities from "./components/recent-activities";
 
 type ActionType =
   | "UPDATE_TIME_RANGE"
@@ -257,6 +259,10 @@ export default function DashboardPage() {
       <div className="grid gap-3 xl:grid-cols-3">
         <TopOSChart />
         <TopPlartformChart />
+        <div className="space-y-3">
+          <TopArchChart />
+          <RecentActivities />
+        </div>
       </div>
     </div>
   );

@@ -24,3 +24,11 @@ export const ActivityTypes = {
   SERVER_STOPPED: "SERVER_STOPPED",
   SERVER_STARTED: "SERVER_STARTED",
 };
+
+export const ActivityColors = {
+  SERVER_CREATED: "#22C55E", // green
+  SERVER_UPDATED: "#3B82F6", // blue
+  SERVER_RESTARTED: "#F59E0B", // amber
+  SERVER_STOPPED: "#EF4444", // red
+  SERVER_STARTED: "#8B5CF6", // purple
+};

@@ -232,3 +232,17 @@ export function getStatisticalPlatform() {
     };
   });
 }
+
+export function getStatisticalArchitecture() {
+  const x64Count = servers.filter(
+    (server) => server.sys_architecture == "x64",
+  ).length;
+  const x86Count = servers.filter(
+    (server) => server.sys_architecture == "x86",
+  ).length;
+
+  return [
+    { key: "x86", count: x86Count, totalServer: servers.length },
+    { key: "x64", count: x64Count, totalServer: servers.length },
+  ];
+}
