@@ -5,10 +5,13 @@ import InfrastructureServerPage from "./pages/infracstructure/servers";
 import SettingPage from "./pages/setting";
 import AppPath from "./constants/app-path";
 import InfrastructureLocationPage from "./pages/infracstructure/locations";
+import NotFoundPage from "./pages/not-found";
+import ErrorPage from "./pages/error";
 
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
+    ErrorBoundary: ErrorPage,
     children: [
       {
         path: AppPath.INDEX,
@@ -41,6 +44,10 @@ const router = createBrowserRouter([
         element: <SettingPage />,
       },
     ],
+  },
+  {
+    path: AppPath.NOT_FOUND,
+    element: <NotFoundPage />,
   },
 ]);
 

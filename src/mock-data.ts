@@ -201,12 +201,14 @@ export function filterTotalServerAndNewServer(from: Date, to: Date) {
 }
 
 export function groupServerByLocation() {
-  return locations.map((location) => {
-    const serverList = servers
-      .filter((server) => server.location_id == location.id)
-      .map((server) => ({ ...server, location: { ...location } }));
-    return { ...location, servers: [...serverList] };
-  });
+  return locations
+    .map((location) => {
+      const serverList = servers
+        .filter((server) => server.location_id == location.id)
+        .map((server) => ({ ...server, location: { ...location } }));
+      return { ...location, servers: [...serverList] };
+    })
+    .filter((location) => location.servers.length > 0);
 }
 
 export function getStatisticalOS() {

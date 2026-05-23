@@ -7,6 +7,8 @@ const AppPath = {
   INFRASTRUCTURE_LOCATIONS: "/infrastructure/locations",
 
   SETTING: "/setting",
+
+  NOT_FOUND: "*",
 };
 
 export default AppPath;

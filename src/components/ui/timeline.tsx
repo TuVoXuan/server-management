@@ -1,5 +1,3 @@
-import { motion } from "motion/react";
-
 interface TimelineItemProps {
   title: string;
   description?: string;
