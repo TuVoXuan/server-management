@@ -11,7 +11,7 @@ export default function TimeRange({ onValueChange, value = "" }: Props) {
       size="sm"
       spacing={0}
       type="single"
-      className="border p-1"
+      className="border p-1 data-[size=sm]:rounded-lg"
       value={value}
       onValueChange={onValueChange}
     >

@@ -6,7 +6,7 @@ import SettingPage from "./pages/setting";
 import AppPath from "./constants/app-path";
 import InfrastructureLocationPage from "./pages/infracstructure/locations";
 import NotFoundPage from "./pages/not-found";
-import ErrorPage from "./pages/error";
+import ErrorPage from "./pages/error-page";
 
 const router = createBrowserRouter([
   {

@@ -229,7 +229,7 @@ export function getStatisticalPlatform() {
       (server) => server.platform == platform[1],
     ).length;
     return {
-      key: platform[0],
+      name: platform[1],
       count: countPlatform,
     };
   });

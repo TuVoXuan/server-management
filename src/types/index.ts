@@ -32,3 +32,11 @@ export interface IServer {
   created_at: string;
   updated_at: string;
 }
+
+export interface IServerActivity {
+  serverName: string;
+  description: string;
+  createdAt: number;
+  activityType: string;
+  serverId: number;
+}

@@ -1,12 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Pie, PieChart } from "recharts";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
@@ -25,19 +30,19 @@ const chartData = data.map((item) => ({
 const chartConfig = {
   ubuntu: {
     label: OperationSystem.ubuntu,
-    color: "#E95420",
+    color: "#FB923C",
   },
   debian: {
     label: OperationSystem.debian,
-    color: "#D70A53",
+    color: "#F43F5E",
   },
   centOS: {
     label: OperationSystem.centOS,
-    color: "#6B4FBB",
+    color: "#A78BFA",
   },
   windowsServer: {
     label: OperationSystem.windowsServer,
-    color: "#0078D4",
+    color: "#60A5FA",
   },
 } satisfies ChartConfig;
 
@@ -46,6 +51,7 @@ export function TopOSChart() {
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Top OS</CardTitle>
+        <CardDescription>Most used operation systems</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -62,13 +68,34 @@ export function TopOSChart() {
               dataKey="count"
               nameKey="os"
               innerRadius={50}
-            />
-            <ChartLegend
-              content={<ChartLegendContent nameKey="os" />}
-              className="-translate-y-2 flex-wrap gap-2 *:justify-center"
+              outerRadius={105}
+              paddingAngle={3}
+              cornerRadius={10}
             />
           </PieChart>
         </ChartContainer>
+        <div className="space-y-4">
+          {chartData.map((item) => (
+            <div key={item.os} className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div
+                  className="h-3 w-3 rounded-full"
+                  style={{
+                    backgroundColor: (chartConfig as any)?.[item.os].color,
+                  }}
+                />
+
+                <span className="text-sm font-medium">
+                  {(chartConfig as any)?.[item.os].label}
+                </span>
+              </div>
+
+              <span className="text-sm text-muted-foreground">
+                {item.count} server(s)
+              </span>
+            </div>
+          ))}
+        </div>
       </CardContent>
     </Card>
   );

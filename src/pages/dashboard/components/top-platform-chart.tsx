@@ -1,86 +1,85 @@
 "use client";
 
-import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
+import { cn } from "@/lib/utils";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from "@/components/ui/chart";
-import { Platform } from "@/constants/server";
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { getStatisticalPlatform } from "@/mock-data";
+import { Progress } from "@/components/ui/progress";
 
 const data = getStatisticalPlatform();
 
-const chartData = data.map((item) => ({
-  platform: item.key,
-  count: item.count,
-  fill: `var(--color-${item.key})`,
-}));
+const configColor = [
+  {
+    name: "Nginx",
+    color: "bg-emerald-500",
+  },
+  {
+    name: "Apache",
+    color: "bg-rose-500",
+  },
+  {
+    name: "NodeJS",
+    color: "bg-blue-500",
+  },
+  {
+    name: "Docker",
+    color: "bg-violet-500",
+  },
+];
 
-const chartConfig = {
-  nginx: {
-    label: Platform.nginx,
-    color: "#009639",
-  },
-  apache: {
-    label: Platform.apache,
-    color: "#D22128",
-  },
-  docker: {
-    label: Platform.docker,
-    color: "#2496ED",
-  },
-  nodeJS: {
-    label: Platform.nodeJS,
-    color: "#5FA04E",
-  },
-} satisfies ChartConfig;
+const mergeDataWithColor = data.map((item) => {
+  const color = configColor.find((i) => i.name == item.name);
+  return { ...item, color: color?.color };
+});
+
+const total = data.reduce((acc, item) => acc + item.count, 0);
 
 export function TopPlartformChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Top Plartform</CardTitle>
+        <CardTitle>Top Platforms</CardTitle>
+        <CardDescription>Most used server platforms</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart
-            accessibilityLayer
-            data={chartData}
-            layout="vertical"
-            margin={{
-              left: 0,
-            }}
-          >
-            <YAxis
-              dataKey="platform"
-              type="category"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) =>
-                chartConfig[value as keyof typeof chartConfig]?.label
-              }
-            />
-            <XAxis dataKey="count" type="number" hide />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent nameKey="platform" hideLabel />}
-            />
-            <Bar dataKey="count" radius={5}>
-              <LabelList
-                dataKey="count"
-                position="insideLeft"
-                offset={8}
-                className="fill-foreground"
-                fontSize={12}
+
+      <CardContent className="space-y-6">
+        {mergeDataWithColor.map((item) => {
+          const percentage = Math.round((item.count / total) * 100);
+
+          return (
+            <div key={item.name} className="space-y-2">
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className={cn("h-2.5 w-2.5 rounded-full", item.color)} />
+
+                  <span className="text-sm font-medium">{item.name}</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold">{item.count}</span>
+
+                  <span className="text-xs text-muted-foreground">
+                    {percentage}%
+                  </span>
+                </div>
+              </div>
+
+              {/* Progress */}
+              <Progress
+                value={percentage}
+                className={"h-2"}
+                indicatorClassName={cn("rounded-full", item.color)}
               />
-            </Bar>
-          </BarChart>
-        </ChartContainer>
+            </div>
+          );
+        })}
       </CardContent>
     </Card>
   );
