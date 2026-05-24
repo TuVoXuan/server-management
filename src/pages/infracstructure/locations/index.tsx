@@ -1,5 +1,6 @@
+import UnderDevelopmentPage from "@/components/under-development-page";
 import React from "react";
 
 export default function InfrastructureLocationPage() {
-  return <div>this is location page</div>;
+  return <UnderDevelopmentPage />;
 }

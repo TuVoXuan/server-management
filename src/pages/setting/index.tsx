@@ -1,9 +1,5 @@
-import React from "react";
-import { useLocation } from "react-router";
+import UnderDevelopmentPage from "@/components/under-development-page";
 
 export default function SettingPage() {
-  const location = useLocation();
-  const currPathname = location.pathname;
-
-  return <div>This is setting page, pathname: {currPathname}</div>;
+  return <UnderDevelopmentPage />;
 }

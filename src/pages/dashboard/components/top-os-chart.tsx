@@ -16,7 +16,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import { OperationSystem } from "@/constants/server";
+import { operationSystem } from "@/constants/server";
 import { getStatisticalOS } from "@/mock-data";
 
 const data = getStatisticalOS();
@@ -29,19 +29,19 @@ const chartData = data.map((item) => ({
 
 const chartConfig = {
   ubuntu: {
-    label: OperationSystem.ubuntu,
+    label: operationSystem.ubuntu,
     color: "#FB923C",
   },
   debian: {
-    label: OperationSystem.debian,
+    label: operationSystem.debian,
     color: "#F43F5E",
   },
   centOS: {
-    label: OperationSystem.centOS,
+    label: operationSystem.centOS,
     color: "#A78BFA",
   },
   windowsServer: {
-    label: OperationSystem.windowsServer,
+    label: operationSystem.windowsServer,
     color: "#60A5FA",
   },
 } satisfies ChartConfig;

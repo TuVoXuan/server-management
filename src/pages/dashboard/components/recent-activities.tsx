@@ -50,7 +50,7 @@ function ActivityIconBluePrint({
   return (
     <div
       className={cn(
-        "size-10 border rounded-lg shrink-0 flex items-center justify-center",
+        "size-10 rounded-lg shrink-0 flex items-center justify-center",
         className,
       )}
     >
@@ -70,7 +70,7 @@ function ActivitityItem({ activity }: IActivityItemProps) {
         return (
           <ActivityIconBluePrint
             icon={<Plus className="text-green-600" />}
-            className="bg-green-50 border-green-200"
+            className="bg-green-50"
           />
         );
       case ActivityTypes.SERVER_RESTARTED:
@@ -78,28 +78,28 @@ function ActivitityItem({ activity }: IActivityItemProps) {
         return (
           <ActivityIconBluePrint
             icon={<RotateCcw className="text-sky-600" />}
-            className="bg-sky-50 border-sky-200"
+            className="bg-sky-50"
           />
         );
       case ActivityTypes.SERVER_STARTED:
         return (
           <ActivityIconBluePrint
             icon={<Play className="text-emerald-600" />}
-            className="bg-emerald-50 border-emerald-200"
+            className="bg-emerald-50"
           />
         );
       case ActivityTypes.SERVER_STOPPED:
         return (
           <ActivityIconBluePrint
             icon={<Pause className="text-gray-600" />}
-            className="bg-gray-50 border-gray-200"
+            className="bg-gray-50"
           />
         );
       case ActivityTypes.SERVER_DELETED:
         return (
           <ActivityIconBluePrint
             icon={<X className="text-red-600" />}
-            className="bg-red-50 border-red-200"
+            className="bg-red-50"
           />
         );
       default:
@@ -158,7 +158,7 @@ function ActivitityItem({ activity }: IActivityItemProps) {
           <span className="font-medium text-base">{activity.serverName}</span>
           {generateBadge(activity.activityType)}
         </div>
-        <p className="text-sm text-muted-foreground truncate">
+        <p className="text-xs text-muted-foreground truncate">
           {activity.description}
         </p>
       </div>

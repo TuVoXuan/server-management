@@ -1,18 +1,18 @@
-export const OperationSystem = {
+export const operationSystem = {
   ubuntu: "Ubuntu",
   debian: "Debian",
   centOS: "CentOS",
   windowsServer: "Windows Server",
 };
 
-export const Platform = {
+export const platform = {
   nginx: "Nginx",
   apache: "Apache",
   docker: "Docker",
   nodeJS: "NodeJS",
 };
 
-export const ServerStatus = {
+export const serverStatus = {
   online: "Online",
   offline: "Offline",
 };

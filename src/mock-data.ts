@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { compareAsc } from "date-fns";
-import { ActivityTypes, OperationSystem, Platform } from "./constants/server";
+import { ActivityTypes, operationSystem, platform } from "./constants/server";
 
 export const locations = [
   {
@@ -212,7 +212,7 @@ export function groupServerByLocation() {
 }
 
 export function getStatisticalOS() {
-  return Object.entries(OperationSystem).map((os) => {
+  return Object.entries(operationSystem).map((os) => {
     const countOS = servers.filter(
       (server) => server.operation_system == os[1],
     ).length;
@@ -224,7 +224,7 @@ export function getStatisticalOS() {
 }
 
 export function getStatisticalPlatform() {
-  return Object.entries(Platform).map((platform) => {
+  return Object.entries(platform).map((platform) => {
     const countPlatform = servers.filter(
       (server) => server.platform == platform[1],
     ).length;
