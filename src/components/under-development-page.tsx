@@ -1,6 +1,5 @@
-import { Hammer, Construction, Rocket } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Construction, Hammer, Rocket } from "lucide-react";
 
 export default function UnderDevelopmentPage() {
   return (
@@ -43,13 +42,6 @@ export default function UnderDevelopmentPage() {
               <Construction className="mx-auto mb-2 h-5 w-5 text-primary" />
               <p className="text-sm font-medium">Maintenance Mode</p>
             </div>
-          </div>
-
-          {/* Action */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <Button>Go Back</Button>
-
-            <Button variant="outline">Refresh</Button>
           </div>
         </CardContent>
       </Card>
